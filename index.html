@@ -1,53 +1,327 @@
-<!DOCTYPE html>
-<html class="img-no-display"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Hello! Welcome to Synology Web Station!</title>
-<style>
-html {
-    height: 100%;
-    overflow: hidden;  
-}
-body {
-    background: url(web_images/bg.png) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100%;
-}
-div#outer {
-    display: table;
-    height: 100%;
-    width: 100%;
-}
-div#container {
-	display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-}
-#paragraph {
-	padding: 20px 0 30px 40px;
-	margin: 0 auto;
-	text-align: left;
-	width: 560px;
-	color: #146b9d;
-	font-size: 11pt;
-	font-weight: bold;
-	font-family: Verdana;
-}
-</style>
-<link href="../help.css" type="text/css" rel="stylesheet" />
-<link href="../scrollbar/flexcroll.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../scrollbar/flexcroll.js"></script>
-<script type="text/javascript" src="../scrollbar/initFlexcroll.js"></script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Javier Francis — Cybersecurity Portfolio</title>
+  <meta name="description" content="Portfolio of Javier Francis — penetration testing, home labs, NAS cloud, tools and contact." />
+  <style>
+    /* ====== RESET ====== */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:#05060a; color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.45; -webkit-tap-highlight-color:transparent;
+    }
+
+    /* ====== LAYOUT ====== */
+    .page{min-height:100vh;display:flex;flex-direction:column}
+    header.site-header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,rgba(3,6,12,0.6),rgba(3,6,12,0.25));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 1rem}
+    .brand{display:flex;align-items:center;gap:.75rem}
+    .logo{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#00ffd1,#00aaff);box-shadow:0 6px 18px rgba(0,170,255,0.08);font-weight:700;color:#041025}
+    .nav-links{display:flex;gap:1rem;list-style:none}
+    .nav-links a{color:rgba(230,238,248,0.85);text-decoration:none;padding:.35rem .6rem;border-radius:8px;font-size:.95rem}
+    .nav-links a:hover{background:rgba(255,255,255,0.02)}
+    .cta-row{display:flex;gap:.5rem;align-items:center}
+    .icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:.45rem;border-radius:10px;cursor:pointer}
+
+    /* ====== HERO ====== */
+    .hero{position:relative;padding:3.25rem 1rem 4rem;overflow:hidden}
+    /* subtle matrix/terminal rain background */
+    .matrix-canvas{position:absolute;inset:0;z-index:0;opacity:.12;filter:blur(0.6px)}
+    .hero-inner{position:relative;z-index:3;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center}
+
+    .hero-left{padding:1rem 0}
+    .eyebrow{font-size:.85rem;text-transform:uppercase;letter-spacing:.14em;color:#7fd3ff;margin-bottom:.6rem}
+    .title{font-size:clamp(2rem,4.2vw,3.25rem);line-height:1.02;font-weight:800;margin-bottom:.6rem;background:linear-gradient(90deg,#d7f3ff,#a7f1d6);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .subtitle{font-size:1.02rem;max-width:56ch;color:rgba(230,238,248,0.88);margin-bottom:1rem}
+
+    /* typing code block */
+    .hero-code{background:#01030a;border:1px solid rgba(255,255,255,0.04);padding:1rem;border-radius:12px;font-family:SFMono-Regular,Menlo,monospace;font-size:.95rem;line-height:1.5;color:#9be8ff;box-shadow:0 14px 40px rgba(0,0,0,0.6)}
+    .typed-line{min-height:1.2em}
+    .cursor{display:inline-block;width:.6ch;background:linear-gradient(90deg,#9be8ff,#00ffd1);margin-left:.25rem;animation:blink 1s steps(2) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    /* hero right - device / terminal mock */
+    .hero-right{display:flex;align-items:center;justify-content:center}
+    .terminal{width:100%;max-width:420px;border-radius:14px;padding:1rem;background:linear-gradient(180deg,#02060a,#061021);border:1px solid rgba(0,170,255,0.06);box-shadow:0 30px 80px rgba(0,0,0,0.6)}
+    .term-top{display:flex;gap:.5rem;align-items:center;margin-bottom:.6rem}
+    .term-btn{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.06)}
+    .term-body{font-family:SFMono-Regular,Menlo,monospace;color:#bfe9ff;font-size:.85rem;min-height:8rem;white-space:pre-wrap}
+
+    /* ====== SECTIONS ====== */
+    .section{max-width:1100px;margin:0 auto;padding:3rem 1rem}
+    .section-title{font-size:1.4rem;font-weight:700;margin-bottom:.4rem}
+    .section-sub{color:rgba(230,238,248,0.72);margin-bottom:1.2rem}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:1.25rem;border-radius:12px;position:relative;overflow:hidden}
+    .card .badge{position:absolute;top:12px;right:12px;background:rgba(0,170,255,0.12);padding:.25rem .5rem;border-radius:999px;font-size:.75rem;color:#9be8ff}
+    .card h3{font-size:1.05rem;margin-bottom:.35rem}
+    .card p{color:rgba(230,238,248,0.78);font-size:.95rem}
+    .card a{display:inline-block;margin-top:.65rem;color:#7fd3ff;text-decoration:none}
+
+    /* skills grid */
+    .skills{display:flex;flex-wrap:wrap;gap:.5rem}
+    .skill-pill{background:rgba(255,255,255,0.02);padding:.4rem .6rem;border-radius:999px;font-family:SFMono-Regular,monospace}
+
+    /* contact */
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+
+    /* footer */
+    footer.site-footer{border-top:1px solid rgba(255,255,255,0.02);margin-top:auto;padding:1.25rem 1rem;background:linear-gradient(180deg,#04060a,#050611)}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .small{font-size:.85rem;color:rgba(230,238,248,0.6)}
+
+    /* responsive */
+    @media (max-width:980px){.hero-inner{grid-template-columns:1fr;padding-bottom:1rem}.grid-3{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}}
+    @media (max-width:640px){.grid-3{grid-template-columns:1fr}.nav-links{display:none}.hero{padding-top:2rem}.hero-right{order:2;margin-top:1rem}}
+
+    /* subtle neon underline animation for links */
+    a.underline{position:relative}
+    a.underline:after{content:'';position:absolute;left:0;bottom:-3px;height:2px;width:0;background:linear-gradient(90deg,#00ffd1,#00aaff);transition:width .25s}
+    a.underline:hover:after{width:100%}
+
+    /* project modal */
+    .modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(1,3,6,0.6);z-index:80;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .18s}
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal-card{max-width:900px;width:100%;background:#02050a;border-radius:12px;padding:1rem;border:1px solid rgba(255,255,255,0.03);}
+    .modal-close{float:right;cursor:pointer}
+
+  </style>
 </head>
 <body>
-<div id="outer">
-<div id="container">
-<img src="web_images/icon.png" />
-<p id="paragraph">Web Station has been enabled. To finish setting up your website, please see the "Web Service" section of DSM Help.</p>
+<div class="page">
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <div class="brand">
+        <div class="logo" aria-hidden>JF</div>
+        <div>
+          <div style="font-weight:700">Javier Francis</div>
+          <div style="font-size:.8rem;color:rgba(230,238,248,0.6)">Cybersecurity • Pen Testing • Home labs</div>
+        </div>
+      </div>
+
+      <ul class="nav-links" role="menubar">
+        <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
+        <li role="none"><a role="menuitem" href="#skills">Skills</a></li>
+        <li role="none"><a role="menuitem" href="#nas">NAS Cloud</a></li>
+        <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="cta-row">
+        <button class="icon-btn" title="Toggle theme" id="themeToggle" aria-pressed="false">🌗</button>
+        <a class="icon-btn" href="#contact" aria-label="Contact">📧</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <canvas class="matrix-canvas" id="matrix"></canvas>
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="eyebrow">Cybersecurity Student & Ethical Hacker</div>
+          <h1 class="title">Securing Systems, One Line at a Time</h1>
+          <p class="subtitle">I design networks, write tooling, and maintain practical hands-on labs. My portfolio showcases NAS Cloud, home labs, and scripting tools.</p>
+
+          <div class="hero-code" aria-hidden="false">
+            <div class="typed-line" id="typed"></div>
+            <span class="cursor" id="cursor">&nbsp;</span>
+            <div style="margin-top:.65rem;color:rgba(230,238,248,0.6);font-size:.86rem">Try: <span style="font-family:SFMono-Regular,monospace">nmap -sV --script vuln 10.10.10.10</span></div>
+          </div>
+
+        </div>
+
+        <div class="hero-right">
+          <div class="terminal" role="region" aria-label="Terminal preview">
+            <div class="term-top"><span class="term-btn" style="background:#ff5f56"></span><span class="term-btn" style="background:#ffbd2e"></span><span class="term-btn" style="background:#27c93f"></span></div>
+            <div class="term-body" id="termBody">$ jfLab@home-lab:~$ sudo ./recon-all
+Initializing passive recon...\n-- scanning 10.10.10.0/24 --\nOpen ports: 22,80,3306\nFound: vulnerable MySQL (CVE-2019-1234)\nRun: exploit/mysql-rce --target 10.10.10.23\n</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">Practical work: lab setups, tooling, and public write ups.</p>
+
+      <div class="grid-3" role="list">
+        <article class="card" role="listitem">
+          <div class="badge">Lab</div>
+          <h3>Home Pen Testing Lab</h3>
+          <p>Virtualized lab with multiple subnets, vulnerable VMs, and an IDS for testing detection and response.</p>
+          <a href="#" class="underline" data-project="lab">Read write-up →</a>
+        </article>
+
+        <article class="card" role="listitem">
+          <div class="badge">Tool</div>
+          <h3>Recon & Scanner Suite</h3>
+          <p>Collection of Python scripts for automated enumeration and reporting (Nmap wrappers, custom parsers).</p>
+          <a href="#" class="underline" data-project="scanner">View code →</a>
+        </article>
+
+        <article class="card" role="listitem">
+          <div class="badge">Cloud</div>
+          <h3>NAS Cloud</h3>
+          <p>Centralized NAS for backups, media streaming, and personal cloud apps with secure remote access.</p>
+          <a href="#" class="underline" data-project="nas">Explore →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <h2 class="section-title">Skills & Tools</h2>
+      <p class="section-sub">What I use day-to-day in labs and assessments.</p>
+
+      <div class="skills" aria-hidden="false">
+        <span class="skill-pill">Penetration Testing</span>
+        <span class="skill-pill">Nmap</span>
+        <span class="skill-pill">Metasploit</span>
+        <span class="skill-pill">Wireshark</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Bash</span>
+        <span class="skill-pill">Docker</span>
+        <span class="skill-pill">Linux</span>
+        <span class="skill-pill">Network Security</span>
+      </div>
+    </section>
+
+    <section class="section" id="nas">
+      <h2 class="section-title">NAS Cloud</h2>
+      <p class="section-sub">Centralized storage, media streaming, and personal cloud services for home and lab usage.</p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Storage & Backup</h3>
+          <p>Automated backups for devices and lab machines. Organized file sharing with permission controls.</p>
+        </article>
+        <article class="card">
+          <h3>Media Server</h3>
+          <p>Self-hosted media server using Jellyfin for streaming videos, music, and photos across devices.</p>
+        </article>
+        <article class="card">
+          <h3>Cloud Tools</h3>
+          <p>Hosted personal cloud applications like Nextcloud and Pi-Hole, integrated with VPN for secure remote access.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">I'm open to internships, collaborations, and bug bounty engagements.</p>
+
+<div class="contact-grid">
+  <div class="card">
+    <h3>Email</h3>
+    <p>javypine01@email.com</p>
+  </div>
+
+  <div class="card">
+    <h3>LinkedIn</h3>
+    <p><a href="https://www.linkedin.com/in/javier-francis" class="underline" target="_blank" rel="noopener">linkedin.com/javierfrancis</a></p>
+  </div>
+
+  <div class="card">
+    <h3>GitHub</h3>
+    <p><a href="https://github.com/jfranc05" class="underline" target="_blank" rel="noopener">github.com/javierfrancis</a></p>
+  </div>
 </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="small">© 2025 Javier Francis — Cybersecurity Portfolio</div>
+      <div style="display:flex;gap:.6rem"><a href="#" class="underline small">Resume</a><a href="#" class="underline small">Privacy</a></div>
+    </div>
+  </footer>
 </div>
 
-</body></html>
+<!-- Project modal (re-used) -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card" id="modalCard">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+(function matrixRain(){
+  const canvas = document.getElementById('matrix');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, cols, yPos;
+  const reset = ()=>{ w = canvas.width = canvas.clientWidth * devicePixelRatio; h = canvas.height = canvas.clientHeight * devicePixelRatio; const fontSize = Math.floor(16 * devicePixelRatio); cols = Math.floor(w / fontSize); yPos = new Array(cols).fill(0); ctx.font = fontSize + 'px monospace';};
+  reset();
+  window.addEventListener('resize', ()=>{reset();});
+  function draw(){ ctx.fillStyle = 'rgba(1,3,6,0.12)'; ctx.fillRect(0,0,w,h); ctx.fillStyle = '#00ffd1'; for(let i=0;i<cols;i++){ const txt = String.fromCharCode(33 + Math.random() * 94); const x = i * 16 * devicePixelRatio; ctx.fillText(txt, x, yPos[i]*16); if(yPos[i]*16 > h && Math.random() > 0.975) yPos[i]=0; yPos[i]++;} requestAnimationFrame(draw);}
+  requestAnimationFrame(draw);
+})();
+
+(function typing(){
+  const lines = [
+    'sudo apt update && sudo apt upgrade',
+    'nmap -sC -sV -oA recon 10.10.10.0/24',
+    'python3 recon-scan.py --target 10.10.10.23',
+    'git clone https://github.com/javierfrancis/recon-suite'
+  ];
+  const el = document.getElementById('typed');
+  const cursor = document.getElementById('cursor');
+  let li=0, ci=0, forward=true;
+  function step(){
+    const txt = lines[li];
+    if(forward){ ci++; el.textContent = txt.slice(0,ci); if(ci===txt.length){ forward=false; setTimeout(step,900); return } }
+    else { ci--; el.textContent = txt.slice(0,ci); if(ci===0){ forward=true; li=(li+1)%lines.length } }
+    setTimeout(step, 60 + Math.random()*40);
+  }
+  step();
+})();
+
+(function termScroll(){
+  const t = document.getElementById('termBody');
+  const lines = t.textContent.split('\n');
+  let idx=0; t.textContent='';
+  function push(){ if(idx<lines.length){ t.textContent += lines[idx++] + '\n'; t.scrollTop = t.scrollHeight; setTimeout(push,400)}}
+  setTimeout(push,500);
+})();
+
+(function modalSetup(){
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+  const modalClose = document.getElementById('modalClose');
+
+  function open(key){
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    let html='';
+    if(key==='lab'){
+      html = '<h2>Home Pen Testing Lab</h2><p>Lab hosts: Kali, Metasploitable, Windows vulnerable VM. Networking: isolated VLANs, attacker, victim, mgmt. Tools: Nmap, Burp, Wireshark, Suricata IDS.</p><pre style="background:#01030a;padding:.6rem;border-radius:8px;margin-top:.6rem;color:#9be8ff;font-family:monospace">docker-compose up -d\n# Start attack VM\n</pre>';
+    } else if(key==='scanner'){
+      html = '<h2>Recon & Scanner Suite</h2><p>Small Python toolset that runs nmap, parses output, and creates a single HTML report with findings and CVE links.</p><pre style="background:#01030a;padding:.6rem;border-radius:8px;margin-top:.6rem;color:#9be8ff;font-family:monospace">python3 recon.py --targets targets.txt --output results.html</pre>';
+    } else if(key==='nas'){
+      html = '<h2>NAS Cloud</h2><p>Deployed a home NAS for media streaming, file sharing, and backups. Integrated Jellyfin, Nextcloud, Pi-Hole, and VPN access for secure remote connectivity.</p>';
+    }
+    modalContent.innerHTML = html;
+    modalClose.focus();
+  }
+
+  document.querySelectorAll('[data-project]').forEach(a=>{ a.addEventListener('click', (e)=>{ e.preventDefault(); open(a.dataset.project); });});
+  modalClose.addEventListener('click', ()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
+  modal.addEventListener('click',(e)=>{ if(e.target===modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); } });
+})();
+
+(function themeToggle(){
+  const btn = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  let light=false;
+  btn.addEventListener('click', ()=>{ light = !light; btn.setAttribute('aria-pressed', String(light)); if(light){ document.body.style.background='#f7fbff'; document.body.style.color='#041025' } else { document.body.style.background='#05060a'; document.body.style.color='#e6eef8' } });
+})();
+
+window.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ const modal = document.getElementById('modal'); if(modal.classList.contains('open')){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); } } });
+</script>
+</body>
+</html>
